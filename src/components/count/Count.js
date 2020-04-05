@@ -1,9 +1,13 @@
 import React, {Component} from "react";
 
-function Count({count}) {
+function Count({count, ClickSum, counter, cartCount, items}) {
+    const Clicksum = (event) => {
+        console.log('event');
+        ClickSum()
+    }
     return (
         <div>
-            <h1>{count}</h1>
+            <h1>{items}</h1>
         </div>
     )
 

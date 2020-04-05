@@ -6,18 +6,67 @@ import Header from "../header/Header";
 
 
 
-function Card({user, count}) {
+function Card({user, count, myFunc, MyFunc2, deleteHandler, incItems, decrItems, newElement}) {
     const [styled, setStyled] = useState(false);
     const [styled2, setStyled2] = useState(true);
+    const[counter, setCounter] = useState(0);
+    const[cartItems, setCartItems] = useState([]);
 
+    const myHandler = (event) => {
+        console.log('event');
+        myFunc()
+    }
+
+    const myHandler3 = (event) => {
+        console.log('event');
+        deleteHandler()
+
+    }
+
+    const myHandler4 = (event) => {
+        console.log('event');
+        setStyled(!styled);
+
+        decrItems()
+
+    }
+
+    // const onAdd = (event) => {
+    //     console.log('event');
+    //     onAddItemToCart()
+    // }
+
+
+//let m = 0;
+    const onAddItemToCart = (id) => {
+        const itemInList = user.find(el => el.id === id)
+        setCartItems((prevCart) => [...prevCart, itemInList])
+    }
+
+    const handleInc = () => setCounter(counter +1);
 
     const OnToggleMeHandler = () => {
         console.log('handler');
         //setStyled (styled => !styled);
         setStyled(!styled);
-        //setStyled(styled => (styled === 'false' ? 'true' : 'false'))
-        console.log('handler2');
-        ClickSum();
+        //handleInc()
+        incItems()
+        //decrItems()
+        // setStyled(styled => (styled === 'false' ? 'true' : 'false'))
+        // if(!styled & m >=0) {
+        //     m++
+        //     console.log(m)
+        //
+        // } else {
+        //     m--
+        //     console.log(m)
+        // }
+
+        //console.log('handler2');
+        //ClickSum();
+        //onAddItemToCart()
+        //ClickSum()
+
 
     }
     const OnToggleMeHandler2 = () => {
@@ -27,18 +76,29 @@ function Card({user, count}) {
         setStyled(styled => (styled === 'true' ? 'false' : ''))
         console.log('handler3');
 
-
-
     }
 
-    //let i = 0;
+
+
+    let i = 0;
     const ClickSum = () => {
-        console.log("oncliksum")
-        if(styled) {
-            count =+ styled
+        if (setStyled(styled)) {
+            i++;
+            count =+i
+            console.log("cliksum") }
+        else {
+            i--
+        count =-i
+        console.log('clicksum') }
 
-        }
+            // if(styled ? 'styled' : '') {
+            //     count =+ styled
+            //
+            // }
+            // return count +1
+
     }
+    //return count +1
 
 
     return (
@@ -54,17 +114,22 @@ function Card({user, count}) {
 
 
                 {/*<a href="#" className="btn btn-primary">Deletion of user</a>*/}
-                <button className="btn btn-primary" onClick={OnToggleMeHandler2}>Deletion</button>
+                <button className="btn btn-primary" onClick={myHandler3}>Deletion</button>
                 {/*<a href="#" className="btn btn-primary">Add</a>*/}
 
                 {/*<div className={`post card ${styled ? 'styled' : ''}`}>*/}
 
-                <button className="btn btn-primary" onClick={OnToggleMeHandler}>Add</button>
+                <button className="btn btn-primary" onClick={OnToggleMeHandler} >Add</button>
+                <button className="btn btn-primary" onClick={myHandler4} >Decr</button>
+                {/*<Count count={count} myFunc={ClickSum}/>*/}
                 {/*<Count count={count} ></Count>*/}
-                {/*<Header myFunc = />*/}
+                <Count className="btn btn-primary"  counter={counter}/>
+                {/*<Header counter={counter} myFunc={ClickSum} />*/}
                 {/*</div>*/}
         </div>
+                {/*<Count count={count} myFunc={ClickSum}/>*/}
             </div>
+            {/*<Count className="btn btn-primary" myFunc={ClickSum} count={count}/>*/}
 </div>
     );
 }
